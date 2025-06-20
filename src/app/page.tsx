@@ -4,110 +4,79 @@ import { NFT_CONTRACTS } from "@/consts/nft_contracts";
 import { Link } from "@chakra-ui/next-js";
 import {
   Box,
-  Card,
-  CardBody,
-  CardHeader,
   Flex,
   Heading,
   Image,
-  Stack,
-  StackDivider,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 export default function Home() {
-  return (
-    <Flex>
-      <Box mt="24px" m="auto">
-        <Flex direction="column" gap="4">
-          {/* Delete this <Card /> in your own app */}
-          <Card border="1px" maxW="90vw" mx="auto">
-            <CardHeader>
-              <Heading size="md">Marketplace Template v2</Heading>
-            </CardHeader>
+  const bgColor = useColorModeValue("white", "brand.dark");
+  const cardBg = useColorModeValue("gray.50", "gray.800");
+  const cardBorder = useColorModeValue("gray.200", "gray.700");
+  const textColor = useColorModeValue("gray.800", "brand.secondary");
 
-            <CardBody>
-              <Stack divider={<StackDivider />} spacing="4">
-                {_latestUpdates.map((item) => (
-                  <Box key={item.title}>
-                    <Heading size="xs" textTransform="uppercase">
-                      {item.title}
-                    </Heading>
-                    {item.bullet_points.map((pt) => (
-                      <Text pt="2" fontSize="sm" key={pt}>
-                        {pt}
-                      </Text>
-                    ))}
-                  </Box>
-                ))}
-              </Stack>
-            </CardBody>
-          </Card>
-          <Heading ml="20px" mt="40px">
-            Trending collections
+  return (
+    <Box bg={bgColor} minH="100vh">
+      <Box mt="24px" m="auto" maxW="1200px" px="20px">
+        <Flex direction="column" gap="8">
+          {/* Hero Section */}
+          <Box textAlign="center" py="60px">
+            <Heading 
+              size="2xl" 
+              color="brand.primary" 
+              mb="4"
+              fontWeight="bold"
+            >
+              Welcome to OrangeNFT
+            </Heading>
+            <Text fontSize="xl" color={textColor} opacity="0.8">
+              Discover, collect and trade the finest digital art and collectibles
+            </Text>
+          </Box>
+          
+          <Heading ml="20px" mt="40px" color="brand.primary">
+            Trending Collections
           </Heading>
           <Flex
             direction="row"
             wrap="wrap"
             mt="20px"
-            gap="5"
-            justifyContent="space-evenly"
+            gap="6"
+            justifyContent="center"
           >
             {NFT_CONTRACTS.map((item) => (
               <Link
-                _hover={{ textDecoration: "none" }}
+                _hover={{ textDecoration: "none", transform: "translateY(-4px)" }}
                 w={300}
                 h={400}
                 key={item.address}
                 href={`/collection/${item.chain.id.toString()}/${item.address}`}
+                transition="all 0.2s"
               >
-                <Image src={item.thumbnailUrl} />
-                <Text fontSize="large" mt="10px">
-                  {item.title}
-                </Text>
+                <Box 
+                  bg={cardBg}
+                  p="4" 
+                  borderRadius="lg" 
+                  border="1px" 
+                  borderColor={cardBorder}
+                  _hover={{ borderColor: "brand.primary" }}
+                >
+                  <Image 
+                    src={item.thumbnailUrl} 
+                    borderRadius="md"
+                    mb="3"
+                  />
+                  <Text fontSize="large" color={textColor} fontWeight="medium">
+                    {item.title}
+                  </Text>
+                </Box>
               </Link>
             ))}
           </Flex>
         </Flex>
       </Box>
-    </Flex>
+    </Box>
   );
 }
-
-// Delete this in your own app
-const _latestUpdates: Array<{ title: string; bullet_points: string[] }> = [
-  {
-    title: "Latest software",
-    bullet_points: [
-      "Shipped with the latest thirdweb SDK (v5) and Next.js 14 (App router)",
-    ],
-  },
-  {
-    title: "Multi-chain",
-    bullet_points: [
-      "Seamlessly trade and browse items on multiple chains",
-      "You'd have to deploy a thirdweb Marketplace V3 contract on each of the chains you want to support",
-    ],
-  },
-  {
-    title: "Multiple collections supported",
-    bullet_points: [
-      "The new template now supports multiple collections, you can view your owned NFTs and your listings",
-    ],
-  },
-  {
-    title: "Upcoming features",
-    bullet_points: [
-      "Select different currencies (ERC20) when creating listings",
-      "UI for English Auctions",
-    ],
-  },
-  {
-    title: "Contribute",
-    bullet_points: [
-      "We welcome all contributions from the community.",
-      "Found a bug or have some suggestions? Create a GitHub issue!",
-      "Repo: https://github.com/thirdweb-example/marketplace-template",
-    ],
-  },
-];

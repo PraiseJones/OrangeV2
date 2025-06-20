@@ -15,6 +15,7 @@ import {
   MenuList,
   Image,
   useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { blo } from "blo";
 import { FaRegMoon } from "react-icons/fa";
@@ -33,20 +34,40 @@ export function Navbar() {
   const account = useActiveAccount();
   const wallet = useActiveWallet();
   const { colorMode } = useColorMode();
+  
+  const navbarBg = useColorModeValue(
+    "rgba(255, 255, 255, 0.8)",
+    "rgba(9, 8, 9, 0.8)"
+  );
+  const borderColor = useColorModeValue(
+    "rgba(0, 0, 0, 0.1)",
+    "rgba(255, 255, 255, 0.1)"
+  );
+
   return (
-    <Box py="30px" px={{ base: "20px", lg: "50px" }}>
-      <Flex direction="row" justifyContent="space-between">
+    <Box
+      position="fixed"
+      top="0"
+      left="0"
+      right="0"
+      zIndex="1000"
+      py="20px"
+      px={{ base: "20px", lg: "50px" }}
+      bg={navbarBg}
+      backdropFilter="blur(20px)"
+      borderBottom="1px solid"
+      borderColor={borderColor}
+    >
+      <Flex direction="row" justifyContent="space-between" maxW="1200px" mx="auto">
         <Box my="auto">
           <Heading
             as={Link}
             href="/"
             _hover={{ textDecoration: "none" }}
-            bgGradient="linear(to-l, #7928CA, #FF0080)"
-            bgClip="text"
+            color="brand.primary"
             fontWeight="extrabold"
           >
-            {/* Replace this with your own branding */}
-            THIRDMART
+            OrangeNFT
           </Heading>
         </Box>
         <Box display={{ lg: "block", base: "none" }}>
