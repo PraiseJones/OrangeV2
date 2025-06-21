@@ -51,7 +51,7 @@ export function Navbar() {
       left="0"
       right="0"
       zIndex="1000"
-      py="20px"
+      py="12px"
       px={{ base: "20px", lg: "50px" }}
       bg={navbarBg}
       backdropFilter="blur(20px)"
@@ -66,6 +66,7 @@ export function Navbar() {
             _hover={{ textDecoration: "none" }}
             color="brand.primary"
             fontWeight="extrabold"
+            size="md"
           >
             OrangeNFT
           </Heading>
@@ -78,7 +79,18 @@ export function Navbar() {
             <ConnectButton
               client={client}
               theme={colorMode}
-              connectButton={{ style: { height: "56px" } }}
+              connectButton={{
+                style: { 
+                  height: "44px",
+                  backgroundColor: "white",
+                  color: "#090809",
+                  border: "1px solid rgba(0, 0, 0, 0.1)",
+                  borderRadius: "8px",
+                  padding: "0 16px",
+                  fontSize: "14px",
+                  fontWeight: "500"
+                }
+              }}
             />
           )}
         </Box>
@@ -101,22 +113,37 @@ function ProfileButton({
   const { colorMode } = useColorMode();
   return (
     <Menu>
-      <MenuButton as={Button} height="56px">
-        <Flex direction="row" gap="5">
+      <MenuButton as={Button} height="44px">
+        <Flex direction="row" gap="4">
           <Box my="auto">
-            <FiUser size={30} />
+            <FiUser size={24} />
           </Box>
           <Image
             src={ensAvatar ?? blo(address as `0x${string}`)}
-            height="40px"
-            rounded="8px"
+            height="32px"
+            rounded="6px"
           />
         </Flex>
       </MenuButton>
       <MenuList>
         <MenuItem display="flex">
           <Box mx="auto">
-            <ConnectButton client={client} theme={colorMode} />
+            <ConnectButton 
+              client={client} 
+              theme={colorMode}
+              connectButton={{
+                style: { 
+                  height: "44px",
+                  backgroundColor: "white",
+                  color: "#090809",
+                  border: "1px solid rgba(0, 0, 0, 0.1)",
+                  borderRadius: "8px",
+                  padding: "0 16px",
+                  fontSize: "14px",
+                  fontWeight: "500"
+                }
+              }}
+            />
           </Box>
         </MenuItem>
         <MenuItem as={Link} href="/profile" _hover={{ textDecoration: "none" }}>
@@ -137,7 +164,7 @@ function ProfileButton({
 function ToggleThemeButton() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Button height="56px" w="56px" onClick={toggleColorMode} mr="10px">
+    <Button height="44px" w="44px" onClick={toggleColorMode} mr="10px">
       {colorMode === "light" ? <FaRegMoon /> : <IoSunny />}
     </Button>
   );

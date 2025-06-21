@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Providers } from "@/components/shared/Providers";
 import { Navbar } from "@/components/shared/Navbar";
+import { Footer } from "@/components/shared/Footer";
 import { AutoConnect } from "thirdweb/react";
 import { client } from "@/consts/client";
 
@@ -22,13 +23,14 @@ export default function RootLayout({
 				<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
 			</head>
 			<body style={{ 
-				paddingTop: "100px",
+				paddingTop: "80px",
 				paddingBottom: "100px"
 			}}>
 				<Providers>
 					<AutoConnect client={client} />
 					<Navbar />
 					{children}
+					<Footer />
 				</Providers>
 			</body>
 		</html>
